@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Reddit;
 using Reddit.Mapper;
+using Reddit.Models;
+using Reddit.Repositories;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -30,6 +30,8 @@ builder.Services.AddCors(options =>
                                  .AllowAnyHeader());
 });
 builder.Services.AddSingleton<IMapper, Mapper>();
+
+builder.Services.AddScoped<IPostsRepository, PostsRepository>();
 
 
 var app = builder.Build();
