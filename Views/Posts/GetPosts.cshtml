@@ -1,0 +1,23 @@
+﻿@model PagedList<Post>
+
+@{
+    ViewBag.Title = "View Posts";
+}
+
+<h1>View Posts</h1>
+
+<p>Hii I am ANri from HTML</p>
+
+@if (Model != null && Model.Items.Count > 0)
+{
+    <ul>
+        @foreach (var post in Model.Items)
+        {
+            <li>Title: @post.Title, Content: @post.Content</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No posts found.</p>
+}

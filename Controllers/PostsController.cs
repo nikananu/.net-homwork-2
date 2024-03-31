@@ -11,7 +11,7 @@ namespace Reddit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class PostsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -26,10 +26,10 @@ namespace Reddit.Controllers
 
         // GET: api/Posts
         [HttpGet]
-        public async Task<IEnumerable<string>> GetPosts(GetPostsRequest getPostsRequest)
+        public async Task<IActionResult> GetPosts(GetPostsRequest getPostsRequest)
         {
           var pL =  await _postsRepository.GetAll(getPostsRequest);
-           return pL.Items.Select(p => p.Title);
+            return View(pL);
         }
 
         // GET: api/Posts/5
