@@ -17,5 +17,14 @@ namespace Reddit.Models
         public virtual ICollection<Post>? Posts { get; set; } = new List<Post>();
 
         public virtual ICollection<User>? Subscribers { get; set; } = new List<User>();
+        public int PostsCount
+        {
+            get { return Posts?.Count ?? 0; }
+        }
+        public int SubscribersCount
+        {
+            get { return Subscribers?.Count ?? 0; }
+        }
+
     }
 }

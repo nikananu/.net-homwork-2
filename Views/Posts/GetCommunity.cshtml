@@ -1,0 +1,23 @@
+﻿@model PagedList<Community>
+
+@{
+    ViewBag.Title = "View communities";
+}
+
+<h1>View Posts</h1>
+
+<p>Hii I am NIKA from HTML</p>
+
+@if (Model != null && Model.Items.Count > 0)
+{
+    <ul>
+        @foreach (var community in Model.Items)
+        {
+            <li>Title: @community.Name, Content: @community.Description</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No Community found.</p>
+}

@@ -3,27 +3,31 @@ using Microsoft.EntityFrameworkCore;
 using Reddit.Dtos;
 using Reddit.Mapper;
 using Reddit.Models;
+using Reddit.Repositories;
+using Reddit.Requests;
 
 
 namespace Reddit.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommunityController : ControllerBase
+    public class CommunityController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-
-        public CommunityController(ApplicationDbContext context, IMapper mapper)
+        private readonly ICommunityRepository _communityRepository;
+        public CommunityController(ApplicationDbContext context, IMapper mapper, ICommunityRepository communityRepository)
         {
             _context = context;
             _mapper = mapper;
+            _communityRepository = communityRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Community>>> GetCommunities()
+        public async Task<IActionResult> GetCommunitys(GetCommunityRequest getCommunityRequest)
         {
-            return await _context.Communities.ToListAsync();
+            var pL = await _communityRepository.GetAll(getCommunityRequest);
+            return View(pL);
         }
 
         [HttpGet("{id}")]

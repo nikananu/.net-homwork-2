@@ -32,6 +32,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<IMapper, Mapper>();
 
 builder.Services.AddScoped<IPostsRepository, PostsRepository>();
+builder.Services.AddScoped<ICommunityRepository, CommunityRepository>();
 
 
 var app = builder.Build();
